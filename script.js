@@ -15,20 +15,24 @@ function toggleMenu(evt) {
     }
 }
 
-document.getElementById("contactForm").addEventListener("submit", function(event) {
-    // prevent default form submission
-    event.preventDefault();
+const contactForm = document.getElementById("contactForm");
 
-    // collect form data
-    const firstName = document.querySelector("#fname").value;
-    const lastName = document.querySelector("#lname").value;
-    const email = document.querySelector("#email").value;
-    const message = document.querySelector("#message").value;
-    const phone = document.querySelector("#phone").value;
+if (contactForm) {
+    contactForm.addEventListener("submit", function(event) {
+        // prevent default form submission
+        event.preventDefault();
 
-    // log form data to console
-    console.log(`Form submitted: ${firstName} ${lastName} ${email} ${phone} ${message}`);
+        // collect form data
+        const firstName = document.querySelector("#fname").value;
+        const lastName = document.querySelector("#lname").value;
+        const email = document.querySelector("#email").value;
+        const message = document.querySelector("#message").value;
+        const phone = document.querySelector("#phone").value;
 
-    // reset form
-    document.getElementById("contactForm").reset();
-});
+        // log form data to console
+        console.log(`Form submitted: ${firstName} ${lastName} ${email} ${phone} ${message}`);
+
+        // reset form
+        contactForm.reset();
+    });
+}
