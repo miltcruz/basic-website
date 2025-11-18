@@ -29,9 +29,37 @@ document.addEventListener("DOMContentLoaded", function() {
             const email = document.querySelector("#email").value;
             const message = document.querySelector("#message").value;
             const phone = document.querySelector("#phone").value;
+            const errorMsg = document.querySelector(".error");
+            const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-            // log form data to console
-            console.log(`Form submitted: ${firstName} ${lastName} ${email} ${phone} ${message}`);
+            // validate required fields
+            if (firstName === "" && lastName === "" && email === "") {
+                errorMsg.innerText = "Please enter required fields.";
+                return;
+            }
+
+            // validate email format
+            if (!emailRegex.test(email)) {
+                errorMsg.innerText = "Please enter a valid email address.";
+                return;
+            }
+
+            // Submit form
+            errorMsg.innerText = ""; // clear any previous error messages
+
+            // Build the mailto form
+            const subject = encodeURIComponent(`Contact Form Submission from ${firstName} ${lastName}`);
+            const body = encodeURIComponent(
+                `Name: ${firstName} ${lastName} \r\n` +
+                `Email: ${email} \r\n` +
+                `Phone: ${phone} \r\n` +
+                `Message:${message}`
+            );
+            const recipient = 'milton.cruz@batestech.edu';
+            const mailtoLink = `mailto:${recipient}?subject=${subject}&body=${body}`;
+            
+            // Open the mailto link
+            window.location.href = mailtoLink;
 
             // reset form
             contactForm.reset();
