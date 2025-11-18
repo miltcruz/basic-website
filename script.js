@@ -15,24 +15,26 @@ function toggleMenu(evt) {
     }
 }
 
-const contactForm = document.getElementById("contactForm");
+document.addEventListener("DOMContentLoaded", function() {
 
-if (contactForm) {
-    contactForm.addEventListener("submit", function(event) {
-        // prevent default form submission
-        event.preventDefault();
+    var contactForm = document.getElementById("contactForm");
+    if (contactForm) {
+        contactForm.addEventListener("submit", function(event) {
+            // prevent default form submission
+            event.preventDefault();
 
-        // collect form data
-        const firstName = document.querySelector("#fname").value;
-        const lastName = document.querySelector("#lname").value;
-        const email = document.querySelector("#email").value;
-        const message = document.querySelector("#message").value;
-        const phone = document.querySelector("#phone").value;
+            // collect form data
+            const firstName = document.querySelector("#fname").value;
+            const lastName = document.querySelector("#lname").value;
+            const email = document.querySelector("#email").value;
+            const message = document.querySelector("#message").value;
+            const phone = document.querySelector("#phone").value;
 
-        // log form data to console
-        console.log(`Form submitted: ${firstName} ${lastName} ${email} ${phone} ${message}`);
+            // log form data to console
+            console.log(`Form submitted: ${firstName} ${lastName} ${email} ${phone} ${message}`);
 
-        // reset form
-        contactForm.reset();
-    });
-}
+            // reset form
+            contactForm.reset();
+        });
+    }
+});
