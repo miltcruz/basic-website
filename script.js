@@ -24,11 +24,11 @@ document.addEventListener("DOMContentLoaded", function() {
             event.preventDefault();
 
             // collect form data
-            const firstName = document.querySelector("#fname").value;
-            const lastName = document.querySelector("#lname").value;
-            const email = document.querySelector("#email").value;
-            const message = document.querySelector("#message").value;
-            const phone = document.querySelector("#phone").value;
+            const firstName = document.querySelector("#fname")?.value || "";
+            const lastName = document.querySelector("#lname")?.value || "";
+            const email = document.querySelector("#email")?.value || "";
+            const message = document.querySelector("#message")?.value || "";
+            const phone = document.querySelector("#phone")?.value || "";
             const errorMsg = document.querySelector(".error");
             const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
@@ -58,8 +58,15 @@ document.addEventListener("DOMContentLoaded", function() {
             const recipient = 'milton.cruz@batestech.edu';
             const mailtoLink = `mailto:${recipient}?subject=${subject}&body=${body}`;
             
-            // Open the mailto link
-            window.location.href = mailtoLink;
+            // error handling for mailto
+            try {
+                // Open the mailto link
+                window.location.href = mailtoLink;
+            } catch (error) {
+                // fallback in case mailto fails
+                window.open(mailtoLink, '_blank');
+                errorMsg.innerText = "Could not open email client. Please send your message manually to " + recipient;
+            }
 
             // reset form
             contactForm.reset();
